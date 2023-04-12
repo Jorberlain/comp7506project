@@ -1,5 +1,6 @@
 package cs.hku.myapplication;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -59,6 +60,7 @@ public class MainActivity extends Activity  implements Handler.Callback, View.On
         if (weather.getTodayWeather() != null)
             tv_weather.setText(weather.getTodayWeather().weather);
     }
+    @SuppressLint("InvalidWakeLockTag")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
