@@ -1,5 +1,6 @@
 package cs.hku.myapplication.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.admin.DevicePolicyManager;
@@ -7,7 +8,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
-import android.os.SystemClock;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -19,13 +19,13 @@ import cs.hku.myapplication.ClockApplication;
 public class ScreenManager {
     public static boolean isScreenOn() {
         PowerManager pm = (PowerManager) ClockApplication.getContext().getSystemService(Activity.POWER_SERVICE);
-        return pm.isScreenOn();
+        return pm.isInteractive();
     }
 
-    public static void turnScreenOff() {
+    /*public static void turnScreenOff() {
         PowerManager pm = (PowerManager) ClockApplication.getContext().getSystemService(Activity.POWER_SERVICE);
         pm.goToSleep(SystemClock.uptimeMillis());
-    }
+    }*/
 
     public static void systemLock(Activity context) {
         DevicePolicyManager policyManager;
@@ -51,7 +51,7 @@ public class ScreenManager {
 
     public static void systemUnLock() {
         PowerManager pm = (PowerManager) ClockApplication.getContext().getSystemService(Activity.POWER_SERVICE);
-        PowerManager.WakeLock mWakelock = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.FULL_WAKE_LOCK, "SimpleTimer");
+        @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock mWakelock = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.FULL_WAKE_LOCK, "SimpleTimer");
         mWakelock.acquire();
     }
 
